@@ -34,22 +34,6 @@ test('Browser Context Playwright Test', async ({browser})=>
 
 });
 
-test.only('Automation Practice first item', async ({page})=> 
-    {
-        const email = page.locator("[id='userEmail']");
-        const password = page.locator("[id='userPassword']");
-        const submitBtn = page.locator("[id='login']");
-        const firstCardName = page.locator(".card-body h5").first();
-
-        await page.goto("https://rahulshettyacademy.com/client/#/auth/login");
-        await email.fill("batroukhhamza@gmail.com");
-        await password.fill("Test1234");
-        await submitBtn.click();
-        await page.waitForURL("https://rahulshettyacademy.com/client/#/dashboard/dash");
-        await page.waitForLoadState("networkidle");
-        console.log(await firstCardName.textContent());
-    });
-
 test('Page Playwright Test', async ({page})=>
     {
         await page.goto("https://google.com");
