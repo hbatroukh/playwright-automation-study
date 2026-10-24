@@ -41,3 +41,19 @@ test('Page Playwright Test', async ({page})=>
         console.log(await page.title());
         await expect(page).toHaveTitle("Google");
     });
+
+ test.only('UI Controls', async ({page})=>
+    {
+        await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+
+        const userName = page.locator('#username');
+        const signInBtn = page.locator("[id='signInBtn']");
+        const dropdown = page.locator("select.form-control");
+        const user = page.locator(".radiotextsty").last();
+        const okayBtn = page.locator("[id='okayBtn']");
+
+        dropdown.selectOption("consult");
+        // await page.pause();
+        await user.click();
+        await okayBtn.click();
+    });
