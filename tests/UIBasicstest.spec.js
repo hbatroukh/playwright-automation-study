@@ -51,9 +51,15 @@ test('Page Playwright Test', async ({page})=>
         const dropdown = page.locator("select.form-control");
         const user = page.locator(".radiotextsty").last();
         const okayBtn = page.locator("[id='okayBtn']");
+        const terms = page.locator("[id='terms']");
 
         dropdown.selectOption("consult");
-        // await page.pause();
         await user.click();
         await okayBtn.click();
+        console.log(await user.isChecked());
+        await expect(user).toBeChecked();
+        await terms.click();
+        await expect(terms).toBeChecked();
+        await terms.uncheck();
+        await expect
     });
