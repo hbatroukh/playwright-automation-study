@@ -52,6 +52,7 @@ test('Page Playwright Test', async ({page})=>
         const user = page.locator(".radiotextsty").last();
         const okayBtn = page.locator("[id='okayBtn']");
         const terms = page.locator("[id='terms']");
+        const firstBlinkingText = page.locator(".blinkingText").first();
 
         dropdown.selectOption("consult");
         await user.click();
@@ -61,5 +62,6 @@ test('Page Playwright Test', async ({page})=>
         await terms.click();
         await expect(terms).toBeChecked();
         await terms.uncheck();
-        await expect
+        expect(await terms.isChecked()).toBeFalsy();
+        await expect(firstBlinkingText).toBeVisible();
     });
