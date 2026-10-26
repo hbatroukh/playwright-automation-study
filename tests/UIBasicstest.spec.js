@@ -66,7 +66,7 @@ test('Page Playwright Test', async ({page})=>
         await expect(firstBlinkingText).toBeVisible();
     });
 
-    test.only('Child windows handling', async ({browser})=>
+    test('Child windows handling', async ({browser})=>
     {
         const context = await browser.newContext();
         const page = await context.newPage();
@@ -86,5 +86,5 @@ test('Page Playwright Test', async ({page})=>
         const emailDomain = arrayText[1].split(" ")[0]
         console.log(emailDomain);
         await userName.fill(emailDomain);
-        console.l
+        console.log(await userName.inputValue());
     })
