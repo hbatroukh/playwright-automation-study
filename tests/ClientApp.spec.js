@@ -10,6 +10,9 @@ test.only('Automation Practice first item', async ({page})=>
         const productName = 'ZARA COAT 3'
         const cartButton = page.locator("[routerLink*='cart']");
         const zaraCoatName = page.locator(`h3:has-text("${productName}")`);
+        const checkoutButton = page.locator("text=Checkout");
+        const countrySelector = page.getByPlaceholder("Select Country");
+        const selectProperCountry = page.getByRole("button", { name: /United States$/ });
 
         await page.goto("https://rahulshettyacademy.com/client/#/auth/login");
         await email.fill("batroukhhamza@gmail.com");
@@ -31,4 +34,10 @@ test.only('Automation Practice first item', async ({page})=>
         }
         await cartButton.click();
         await expect(zaraCoatName).toBeVisible();
+
+        await checkoutButton.click();
+        await countrySelector.pressSequentially("United S");
+        await selectProperCountry.click();
+
+        await page.pause();
     });
