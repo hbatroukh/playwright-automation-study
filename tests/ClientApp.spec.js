@@ -13,6 +13,13 @@ test.only('Automation Practice first item', async ({page})=>
         const checkoutButton = page.locator("text=Checkout");
         const countrySelector = page.getByPlaceholder("Select Country");
         const selectProperCountry = page.getByRole("button", { name: /United States$/ });
+        const emailLabel = page.getByText("batroukhhamza@gmail.com");
+        const placeOrderBtn = page.getByText("Place Order");
+        const thankYouForYourOrderText = page.getByText(" Thankyou for the order. ");
+        const orderId = page.locator(".em-spacer-1 .ng-star-inserted");
+        const myOrdersButton = page.locator("button[routerlink*='myorders']");
+        const listOfOrderIds = page.locator("tbody tr th");
+        const orderRows = page.locator("tbody tr");
 
         await page.goto("https://rahulshettyacademy.com/client/#/auth/login");
         await email.fill("batroukhhamza@gmail.com");
@@ -36,8 +43,26 @@ test.only('Automation Practice first item', async ({page})=>
         await expect(zaraCoatName).toBeVisible();
 
         await checkoutButton.click();
-        await countrySelector.pressSequentially("United S");
+        await countrySelector.pressSequentially("United S", {delay: 150});
         await selectProperCountry.click();
+
+        await expect(emailLabel).toBeVisible();
+        await placeOrderBtn.click();
+
+        await expect (thankYouForYourOrderText).toBeVisible();
+        console.log(await orderId.textContent());
+        const orderIdText = await orderId.textContent();
+
+        await myOrdersButton.click();
+        await orderRows.first().waitFor();
+
+        const listOfIds = await listOfOrderIds.count();
+        for(let i = 0; i < listOfIds; i++){
+            if(orderIdText.includes((await listOfOrderIds.nth(i).textContent()).trim())){
+                await orderRows.nth(i).locator("button.btn-primary").click();
+                break;
+            }
+        }
 
         await page.pause();
     });
