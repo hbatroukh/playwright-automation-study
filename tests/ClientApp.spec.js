@@ -63,6 +63,4 @@ test('Automation Practice first item', async ({page})=>
                 break;
             }
         }
-
-        await page.pause();
     });
