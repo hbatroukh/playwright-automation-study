@@ -1,6 +1,6 @@
 const {test, expect} = require('@playwright/test');
 
-test.only('Full booking flow', async ({page}) => {
+test('Full booking flow', async ({page}) => {
 
     const email = page.getByLabel("Email");
     const password = page.getByLabel("Password", {exact: true});
@@ -25,7 +25,7 @@ test.only('Full booking flow', async ({page}) => {
 
     await page.goto("https://eventhub.rahulshettyacademy.com/login");
     await email.fill("hamzabatroukh@gmail.com");
-    await password.fill("test!");
+    await password.fill("Hamza123!");
     await signInBtn.click();
     await adminDropdown.click();
     await manageEvents.click();
