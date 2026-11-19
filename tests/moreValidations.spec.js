@@ -1,7 +1,7 @@
 const {test, expect} = require('@playwright/test');
 
 
-test.only("Popup validations", async ({page}) => {
+test("Popup validations", async ({page}) => {
 
     const hideShowTextBox = page.getByPlaceholder("Hide/Show Example");
     const hideBtn = page.getByRole("button", {name: 'Hide'});
