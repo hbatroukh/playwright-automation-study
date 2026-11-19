@@ -32,7 +32,7 @@ test.only('@API Place the order', async ({page})=>
     await page.goto("https://rahulshettyacademy.com/client");
      await page.locator("button[routerlink*='myorders']").click();
      await page.locator("tbody").waitFor();
-    const rows = await page.locator("tbody tr");
+    const rows = page.locator("tbody tr");
      
      
     for(let i =0; i<await rows.count(); ++i)
