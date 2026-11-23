@@ -1,5 +1,6 @@
 // @ts-check
 import { defineConfig, devices } from '@playwright/test';
+import { trace } from 'node:console';
 
 
 /**
@@ -19,6 +20,7 @@ const config = ({
       headless : false,
       actionTimeout: 10 * 1000,
       navigationTimeout: 30 * 1000,
+      trace: 'off',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
 
     },

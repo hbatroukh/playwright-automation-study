@@ -19,7 +19,7 @@ test.beforeAll(async({browser}) =>
 
 })
 
-test.only('Automation Practice first item', async ()=> 
+test('Automation Practice first item', async ()=> 
     {
         
         const page = await webContext.newPage();
