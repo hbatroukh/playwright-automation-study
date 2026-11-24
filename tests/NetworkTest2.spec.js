@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test.only('Security test request intercept', async ({ page }) => {
+test('Security test request intercept', async ({ page }) => {
 
     const viewBtn = page.getByRole("button", { name: "View" }).first();
     const email = page.locator("[id='userEmail']");
