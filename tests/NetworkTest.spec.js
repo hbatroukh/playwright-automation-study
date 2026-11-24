@@ -15,7 +15,7 @@ test.beforeAll(async () => {
 
 
 //create order is success
-test.only('@API Place the order', async ({ page }) => {
+test('@API Place the order', async ({ page }) => {
     await page.addInitScript(value => {
 
         window.localStorage.setItem('token', value);

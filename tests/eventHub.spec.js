@@ -1,11 +1,11 @@
-const {test, expect} = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 
-test('Full booking flow', async ({page}) => {
+test('Full booking flow', async ({ page }) => {
 
     const email = page.getByLabel("Email");
-    const password = page.getByLabel("Password", {exact: true});
-    const signInBtn = page.getByRole("button", {name: 'Sign in'});
-    const adminDropdown = page.getByRole("button", {name: 'Admin'});
+    const password = page.getByLabel("Password", { exact: true });
+    const signInBtn = page.getByRole("button", { name: 'Sign in' });
+    const adminDropdown = page.getByRole("button", { name: 'Admin' });
     const manageEvents = page.getByRole("navigation").getByRole("link", { name: "Manage Events" });
     const title = page.getByLabel("Title");
     const category = page.getByLabel("Category");
@@ -14,14 +14,14 @@ test('Full booking flow', async ({page}) => {
     const eventTime = page.getByLabel("Event Date & Time");
     const price = page.getByLabel("Price ($)");
     const totalSeats = page.getByLabel("Total Seats");
-    const addEventBtn = page.getByRole("button", {name: '+ Add Event'});
+    const addEventBtn = page.getByRole("button", { name: '+ Add Event' });
     const events = page.getByTestId("nav-events");
-    const halalFestCard = page.getByTestId("event-card").filter({ hasText: 'Halal fest'});
+    const halalFestCard = page.getByTestId("event-card").filter({ hasText: 'Halal fest' });
     const seatsRemaining = halalFestCard.getByText("seats available");
-    const bookNowBtnHalalFest = halalFestCard.getByRole("link", {name: 'Book Now'});
+    const bookNowBtnHalalFest = halalFestCard.getByRole("link", { name: 'Book Now' });
     const fullNameBooking = page.getByLabel("Full Name");
     const phoneNumber = page.getByLabel("Phone Number");
-    const confirmBookingBtn = page.getByRole("button", {name: 'Confirm Booking'});
+    const confirmBookingBtn = page.getByRole("button", { name: 'Confirm Booking' });
 
     await page.goto("https://eventhub.rahulshettyacademy.com/login");
     await email.fill("hamzabatroukh@gmail.com");
@@ -46,6 +46,6 @@ test('Full booking flow', async ({page}) => {
     await phoneNumber.fill("8002753952");
     await confirmBookingBtn.click();
     await events.click();
-    await expect(seatsRemaining).toHaveText((seatsBefore-1) + " seats available");
+    await expect(seatsRemaining).toHaveText((seatsBefore - 1) + " seats available");
 
 })

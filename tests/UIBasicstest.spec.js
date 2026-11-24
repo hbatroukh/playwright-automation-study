@@ -1,8 +1,7 @@
-const {test, expect} = require('@playwright/test');
+const { test, expect } = require('@playwright/test');
 
 
-test('Browser Context Playwright Test', async ({browser})=>
-{   
+test('Browser Context Playwright Test', async ({ browser }) => {
     //opens a browser without any cookies
     const context = await browser.newContext();
     const page = await context.newPage();
@@ -34,57 +33,54 @@ test('Browser Context Playwright Test', async ({browser})=>
 
 });
 
-test('Page Playwright Test', async ({page})=>
-    {
-        await page.goto("https://google.com");
-        //get title and assert
-        console.log(await page.title());
-        await expect(page).toHaveTitle("Google");
-    });
+test('Page Playwright Test', async ({ page }) => {
+    await page.goto("https://google.com");
+    //get title and assert
+    console.log(await page.title());
+    await expect(page).toHaveTitle("Google");
+});
 
- test('UI Controls', async ({page})=>
-    {
-        await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+test('UI Controls', async ({ page }) => {
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
 
-        const userName = page.locator('#username');
-        const signInBtn = page.locator("[id='signInBtn']");
-        const dropdown = page.locator("select.form-control");
-        const user = page.locator(".radiotextsty").last();
-        const okayBtn = page.locator("[id='okayBtn']");
-        const terms = page.locator("[id='terms']");
-        const firstBlinkingText = page.locator(".blinkingText").first();
+    const userName = page.locator('#username');
+    const signInBtn = page.locator("[id='signInBtn']");
+    const dropdown = page.locator("select.form-control");
+    const user = page.locator(".radiotextsty").last();
+    const okayBtn = page.locator("[id='okayBtn']");
+    const terms = page.locator("[id='terms']");
+    const firstBlinkingText = page.locator(".blinkingText").first();
 
-        dropdown.selectOption("consult");
-        await user.click();
-        await okayBtn.click();
-        console.log(await user.isChecked());
-        await expect(user).toBeChecked();
-        await terms.click();
-        await expect(terms).toBeChecked();
-        await terms.uncheck();
-        expect(await terms.isChecked()).toBeFalsy();
-        await expect(firstBlinkingText).toBeVisible();
-    });
+    dropdown.selectOption("consult");
+    await user.click();
+    await okayBtn.click();
+    console.log(await user.isChecked());
+    await expect(user).toBeChecked();
+    await terms.click();
+    await expect(terms).toBeChecked();
+    await terms.uncheck();
+    expect(await terms.isChecked()).toBeFalsy();
+    await expect(firstBlinkingText).toBeVisible();
+});
 
-    test('Child windows handling', async ({browser})=>
-    {
-        const context = await browser.newContext();
-        const page = await context.newPage();
+test('Child windows handling', async ({ browser }) => {
+    const context = await browser.newContext();
+    const page = await context.newPage();
 
-        await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
-        const documentLink = page.locator("[href*='documents-request']");
-        const userName = page.locator('#username');
+    await page.goto("https://rahulshettyacademy.com/loginpagePractise/");
+    const documentLink = page.locator("[href*='documents-request']");
+    const userName = page.locator('#username');
 
-        const [newPage] = await Promise.all(
+    const [newPage] = await Promise.all(
         [
             context.waitForEvent('page'),
             documentLink.click()
         ])
-        
-        const text = await newPage.locator(".red").textContent();
-        const arrayText = text.split("@");
-        const emailDomain = arrayText[1].split(" ")[0]
-        console.log(emailDomain);
-        await userName.fill(emailDomain);
-        console.log(await userName.inputValue());
-    })
+
+    const text = await newPage.locator(".red").textContent();
+    const arrayText = text.split("@");
+    const emailDomain = arrayText[1].split(" ")[0]
+    console.log(emailDomain);
+    await userName.fill(emailDomain);
+    console.log(await userName.inputValue());
+})
