@@ -1,7 +1,7 @@
 const { test, expect } = require('@playwright/test');
 
 
-test('Browser Context Playwright Test', async ({ browser }) => {
+test.only('Browser Context Playwright Test', async ({ browser }) => {
     //opens a browser without any cookies
     const context = await browser.newContext();
     const page = await context.newPage();
