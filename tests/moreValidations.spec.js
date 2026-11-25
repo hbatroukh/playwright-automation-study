@@ -22,3 +22,15 @@ test("Popup validations", async ({ page }) => {
     await expect(subscribersText).toBeVisible();
 
 })
+
+test.only("Screenshot & Visual comparison", async ({page})=>{
+    const hideShowTextBox = page.getByPlaceholder("Hide/Show Example");
+    const hideBtn = page.getByRole("button", { name: 'Hide' });
+
+    await page.goto("https://rahulshettyacademy.com/AutomationPractice/");
+    await expect(hideShowTextBox).toBeVisible();
+    await hideShowTextBox.screenshot({path: 'partialScreenshot.png'});
+    await hideBtn.click();
+    await page.screenshot({path: 'screenshot.png'});
+    await expect(hideShowTextBox).toBeHidden();
+})
