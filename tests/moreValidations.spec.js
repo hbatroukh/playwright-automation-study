@@ -23,7 +23,7 @@ test("Popup validations", async ({ page }) => {
 
 })
 
-test.only("Screenshot & Visual comparison", async ({page})=>{
+test("Screenshot & Visual comparison", async ({page})=>{
     const hideShowTextBox = page.getByPlaceholder("Hide/Show Example");
     const hideBtn = page.getByRole("button", { name: 'Hide' });
 
@@ -33,4 +33,10 @@ test.only("Screenshot & Visual comparison", async ({page})=>{
     await hideBtn.click();
     await page.screenshot({path: 'screenshot.png'});
     await expect(hideShowTextBox).toBeHidden();
+})
+
+test.only('visual', async({page}) =>{
+
+    await page.goto("https://www.google.com/")
+    expect(await page.screenshot()).toMatchSnapshot('landing.png')
 })
